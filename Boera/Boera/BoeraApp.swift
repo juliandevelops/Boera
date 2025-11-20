@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import OSLog
 
 @main
 struct BoeraApp: App {
     static private let persistenceController = PersistenceController.shared
+    
+    static internal let logger : Logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.example.Boera", category: "General")
 
     var body: some Scene {
         WindowGroup {

@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CD_Ingredient" representedClassName="CD_Ingredient" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="Binary" allowsCloudEncryption="YES"/>
+        <attribute name="ingredientDescription" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <relationship name="drinks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DrinkIngredient" inverseName="ingredient" inverseEntity="DrinkIngredient"/>
+    </entity>
     <entity name="Drink" representedClassName="Drink" syncable="YES" codeGenerationType="class">
         <attribute name="alcoholic" optional="YES" attributeType="Boolean" defaultValueString="NO" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
         <attribute name="alcoholPercentage" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="100" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DrinkEntry" inverseName="drink" inverseEntity="DrinkEntry"/>
-        <relationship name="ingriedients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="drink" inverseEntity="Ingredient"/>
+        <relationship name="ingriedients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DrinkIngredient" inverseName="drink" inverseEntity="DrinkIngredient"/>
     </entity>
     <entity name="DrinkEntry" representedClassName="DrinkEntry" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="10000" defaultValueString="250" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" allowsCloudEncryption="YES" usesScalarValueType="NO"/>
         <relationship name="drink" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Drink" inverseName="entries" inverseEntity="Drink"/>
     </entity>
-    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
-        <relationship name="drink" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Drink" inverseName="ingriedients" inverseEntity="Drink"/>
+    <entity name="DrinkIngredient" representedClassName="DrinkIngredient" syncable="YES" codeGenerationType="class">
+        <attribute name="concentration" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="100" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="percentage" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="100" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <relationship name="drink" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Drink" inverseName="ingriedients" inverseEntity="Drink"/>
+        <relationship name="ingredient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Ingredient" inverseName="drinks" inverseEntity="CD_Ingredient"/>
     </entity>
 </model>

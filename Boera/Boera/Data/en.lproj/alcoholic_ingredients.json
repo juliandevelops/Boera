@@ -1,0 +1,9 @@
+{
+    "alcoholicIngredients": [
+        {
+            "name": "beer",
+            "description": "some kind of beer",
+            "imageName": "beer"
+        },
+    ]
+}

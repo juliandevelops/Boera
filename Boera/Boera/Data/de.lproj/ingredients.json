@@ -1,0 +1,55 @@
+{
+    "ingredients": [
+        {
+            "name": "Apfel",
+            "description": "etwas süß",
+            "imageName": "apple"
+        },
+        {
+            "name": "Karotte",
+            "description": "Gut für deine Augen",
+            "imageName": "carrot"
+        },
+        {
+            "name": "Birne",
+            "imageName": "pear"
+        },
+        {
+            "name": "Zitrone",
+            "imageName": "citron"
+        },
+        {
+            "name": "Orange",
+            "imageName": "orange"
+        },
+        {
+            "name": "Eis",
+            "description": "Etwas um dein Getränk zu kühlen",
+            "imageName": "ice"
+        },
+        {
+            "name": "Granatapfel",
+            "imageName": "pommegranade"
+        },
+        {
+            "name": "Traube",
+            "imageName": "grape"
+        },
+        {
+            "name": "cranberry",
+            "imageName": "cranberry"
+        },
+        {
+            "name": "Limette",
+            "imageName": "limette"
+        },
+        {
+            "name": "Kirsche",
+            "imageName": "cherry"
+        },
+        {
+            "name": "Himbeere",
+            "imageName": "raspberry"
+        }
+    ]
+}

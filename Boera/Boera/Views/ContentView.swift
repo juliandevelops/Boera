@@ -9,8 +9,9 @@ import SwiftUI
 import CoreData
 
 internal struct ContentView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     /// All drink entries sorted by timestamp
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \DrinkEntry.timestamp, ascending: true)],
@@ -19,26 +20,53 @@ internal struct ContentView: View {
     private var entries: FetchedResults<DrinkEntry>
     
     /// Whether or not the sheet to add a new entry is shown
-    @State private var addEntryShown: Bool = false
+    @State private var addEntryShown : Bool = false
+    
+    /// Set true to present the new drink sheet
+    @State private var addDrinkPresented : Bool = false
+    
+    @State private var addIngredientPresented : Bool = false
     
     var body: some View {
         NavigationStack {
-            // If entries is empty, this is shown in the middle of the screen. Because entries is empty, the list down further isn't rendered.
             // TODO: add image of bo
             homeBody()
-            .sheet(isPresented: $addEntryShown) {
-                AddEntrySheet()
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        addEntryShown.toggle()
-                    } label: {
-                        Image(systemName: "plus")
+                .sheet(isPresented: $addEntryShown) {
+                    AddEntrySheet()
+                }
+                .sheet(isPresented: $addDrinkPresented) {
+                    AddDrinkSheet()
+                }
+                .sheet(isPresented: $addIngredientPresented) {
+                    AddIngredientSheet()
+                }
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Menu {
+                            Button {
+                                addIngredientPresented.toggle()
+                            } label: {
+                                Label("Add new ingredient", systemImage: "carrot")
+                            }
+                            Divider()
+                            Button {
+                                addDrinkPresented.toggle()
+                            } label: {
+                                Label("Add new drink", systemImage: "waterbottle")
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                        }
+                    }
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            addEntryShown.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
-            }
-            .navigationTitle("Hi👋")
+                .navigationTitle("Hi👋")
         }
     }
     
@@ -51,20 +79,52 @@ internal struct ContentView: View {
                     .padding(.all, 24)
             }
         } else {
-            List(entries) {
-                entry in
-                entryContainer(entry)
+            List {
+                ForEach(getDatesArray(), id: \.self) {
+                    date in
+                    Section(DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none)) {
+                        ForEach(entries.filter({ getDateComponents($0.timestamp!) == getDateComponents(date) })) {
+                            entry in
+                            entryContainer(entry)
+                        }
+                    }
+                }
             }
         }
+    }
+    
+    /// Returns an array of unique dates (in terms of days) of the entries array
+    private func getDatesArray() -> [Date] {
+        let dates : [Date] = entries.map(\.timestamp!)
+        var uniques : Set<Date> = Set()
+        dates.forEach {
+            date in
+            if !uniques.contains(where: { getDateComponents($0) == getDateComponents(date) }) {
+                uniques.insert(date)
+            }
+        }
+        return Array(uniques)
+    }
+    
+    /// Returns the date components: day, month and year of the given date
+    private func getDateComponents(_ date: Date) -> DateComponents {
+        let comps = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return comps
     }
     
     /// Builds a single line of the list for a single entry in the list of drink entries
     @ViewBuilder
     private func entryContainer(_ entry : DrinkEntry) -> some View {
-        HStack {
-            Text("\(entry.amount) ml")
-            Spacer()
-            Text(entry.timestamp!, style: .date)
+        // TODO: Navigation Link or also sheet?
+        NavigationLink {
+            EntryDetails(entry: entry)
+        } label: {
+            HStack {
+                Text("\(entry.amount) ml")
+                Spacer()
+                Text(DateFormatter.localizedString(from: entry.timestamp!, dateStyle: .short, timeStyle: .short))
+                    .foregroundStyle(.gray)
+            }
         }
     }
 }

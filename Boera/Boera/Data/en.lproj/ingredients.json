@@ -1,0 +1,60 @@
+{
+    "ingredients": [
+        {
+            "name": "apple",
+            "description": "little sweet",
+            "imageName": "apple"
+        },
+        {
+            "name": "carrot",
+            "description": "good for your eyes",
+            "imageName": "carrot"
+        },
+        {
+            "name": "pear",
+            "imageName": "pear"
+        },
+        {
+            "name": "citron",
+            "imageName": "citron"
+        },
+        {
+            "name": "orange",
+            "imageName": "orange"
+        },
+        {
+            "name": "ice",
+            "description": "cool your drink down a bit",
+            "imageName": "ice"
+        },
+        {
+            "name": "co2",
+            "description": "blub",
+            "imageName": "co2"
+        }
+        {
+            "name": "pommegranade",
+            "imageName": "pommegranade"
+        },
+        {
+            "name": "grape",
+            "imageName": "grape"
+        },
+        {
+            "name": "cranberry",
+            "imageName": "cranberry"
+        },
+        {
+            "name": "limette",
+            "imageName": "limette"
+        },
+        {
+            "name": "cherry",
+            "imageName": "cherry"
+        },
+        {
+            "name": "rasberry",
+            "imageName": "raspberry"
+        },
+    ]
+}

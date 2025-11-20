@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="ingredients.sqlite" uuid="81d8666f-195c-4b13-b3a7-49615da6bb5b">
+    <data-source source="LOCAL" name="boera.sqlite" uuid="81d8666f-195c-4b13-b3a7-49615da6bb5b">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>Drink ingredients for Boera app</remarks>
+      <remarks>drinks, ingredients etc. for boera app</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:ingredients.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:boera.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
