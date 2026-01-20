@@ -12,7 +12,22 @@ internal struct EntryDetails: View {
     internal var entry : DrinkEntry
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            HStack {
+                Text("Amount")
+                Spacer()
+                Text("\(entry.amount)")
+                    .foregroundStyle(.gray)
+            }
+            HStack {
+                Text("Time")
+                Spacer()
+                Text(entry.timestamp!, style: .date)
+                    .foregroundStyle(.gray)
+            }
+        }
+        .navigationTitle("Details")
+        .navigationBarTitleDisplayMode(.automatic)
     }
 }
 

@@ -26,38 +26,41 @@ internal struct ContentView: View {
     @State private var addDrinkPresented : Bool = false
     
     @State private var addIngredientPresented : Bool = false
-    
+
+    @State private var errSavingPresented : Bool = false
+
     var body: some View {
         NavigationStack {
             // TODO: add image of bo
             homeBody()
                 .sheet(isPresented: $addEntryShown) {
-                    AddEntrySheet()
+//                    AddEntrySheet()
+                    AddEntrySimpleSheet()
                 }
-                .sheet(isPresented: $addDrinkPresented) {
-                    AddDrinkSheet()
-                }
-                .sheet(isPresented: $addIngredientPresented) {
-                    AddIngredientSheet()
-                }
+//                .sheet(isPresented: $addDrinkPresented) {
+//                    AddDrinkSheet()
+//                }
+//                .sheet(isPresented: $addIngredientPresented) {
+//                    AddIngredientSheet()
+//                }
                 .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        Menu {
-                            Button {
-                                addIngredientPresented.toggle()
-                            } label: {
-                                Label("Add new ingredient", systemImage: "carrot")
-                            }
-                            Divider()
-                            Button {
-                                addDrinkPresented.toggle()
-                            } label: {
-                                Label("Add new drink", systemImage: "waterbottle")
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis.circle")
-                        }
-                    }
+//                    ToolbarItem(placement: .automatic) {
+//                        Menu {
+//                            Button {
+//                                addIngredientPresented.toggle()
+//                            } label: {
+//                                Label("Add new ingredient", systemImage: "carrot")
+//                            }
+//                            Divider()
+//                            Button {
+//                                addDrinkPresented.toggle()
+//                            } label: {
+//                                Label("Add new drink", systemImage: "waterbottle")
+//                            }
+//                        } label: {
+//                            Image(systemName: "ellipsis.circle")
+//                        }
+//                    }
                     ToolbarItem(placement: .primaryAction) {
                         Button {
                             addEntryShown.toggle()
@@ -65,6 +68,11 @@ internal struct ContentView: View {
                             Image(systemName: "plus")
                         }
                     }
+                }
+                .alert("Error saving", isPresented: $errSavingPresented) {
+
+                } message: {
+                    Text("There's been an error saving your data. Please try again")
                 }
                 .navigationTitle("Hi👋")
         }
@@ -86,6 +94,18 @@ internal struct ContentView: View {
                         ForEach(entries.filter({ getDateComponents($0.timestamp!) == getDateComponents(date) })) {
                             entry in
                             entryContainer(entry)
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        viewContext.delete(entry)
+                                        do {
+                                            try viewContext.save()
+                                        } catch {
+                                            // TODO: error handling
+                                        }
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
                     }
                 }

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Update Permissions are used to write data to apple health</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Access to health systems is required in order to write your drinking habits to Apple health</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

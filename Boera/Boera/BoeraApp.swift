@@ -5,6 +5,7 @@
 //  Created by Julian Schumacher on 06.05.25.
 //
 
+import AppIntents
 import SwiftUI
 import OSLog
 
