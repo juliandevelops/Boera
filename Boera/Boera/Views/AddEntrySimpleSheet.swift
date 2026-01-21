@@ -84,7 +84,6 @@ internal struct AddEntrySimpleSheet: View {
     }
 
     private func done() {
-        let entry = DrinkEntry(context: context)
         guard let amountInt = Int(amount) else {
             return
         }
@@ -92,6 +91,7 @@ internal struct AddEntrySimpleSheet: View {
             errDataPresented.toggle()
             return
         }
+        let entry = DrinkEntry(context: context)
         entry.amount = Int16(amountInt)
         entry.timestamp = Date.now
         do {
