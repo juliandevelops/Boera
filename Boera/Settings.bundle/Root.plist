@@ -10,25 +10,29 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>app information</string>
+			<string>About</string>
 			<key>FooterText</key>
-			<string>information about the app</string>
+			<string>Build with ❤️‍🔥 by Julian Schumacher</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>app version</string>
+			<string>Version</string>
 			<key>Key</key>
 			<string>app_version_setting</string>
+			<key>DefaultValue</key>
+			<string>1.0.0</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>build version</string>
+			<string>Build</string>
 			<key>Key</key>
 			<string>build_version_setting</string>
+			<key>DefaultValue</key>
+			<string>1</string>
 		</dict>
 	</array>
 </dict>

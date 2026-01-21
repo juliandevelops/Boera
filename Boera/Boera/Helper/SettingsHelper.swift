@@ -10,6 +10,7 @@ import Foundation
 private enum Settings : String, RawRepresentable {
     case appVersion = "app_version_setting"
     case buildVersion = "build_version_setting"
+    case useNotifications = "use_notifications_setting"
 }
 
 internal struct SettingsHelper {
