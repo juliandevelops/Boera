@@ -9,17 +9,17 @@ import CoreData
 import SwiftUI
 
 internal struct AddEntrySimpleSheet: View {
-
+    
     @Environment(\.managedObjectContext) private var context
-
+    
     @Environment(\.dismiss) private var dismiss
-
+    
     @State private var amount : String = ""
-
+    
     @State private var errSavingPresented : Bool = false
-
+    
     @State private var errDataPresented : Bool = false
-
+    
     var body: some View {
         NavigationStack {
             Section {
@@ -82,7 +82,7 @@ internal struct AddEntrySimpleSheet: View {
             }
         }
     }
-
+    
     private func done() {
         guard let amountInt = Int(amount) else {
             return
@@ -95,7 +95,7 @@ internal struct AddEntrySimpleSheet: View {
         entry.amount = Int16(amountInt)
         entry.timestamp = Date.now
         do {
-            try context.save()
+            try Storage.saveEntry(entry, context: context)
         } catch {
             errSavingPresented.toggle()
             return

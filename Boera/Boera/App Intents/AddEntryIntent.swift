@@ -19,7 +19,7 @@ internal struct AddEntryIntent: AppIntent {
     @Parameter(
         title: "amount",
         description: "The amount you just drank in ml",
-        requestValueDialog: IntentDialog("How much did you drink?")
+        requestValueDialog: IntentDialog("How much did you drink (in ml)?")
     ) var amount: Int
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -28,7 +28,7 @@ internal struct AddEntryIntent: AppIntent {
         drink.amount = Int16(amount)
         drink.timestamp = Date()
         do {
-            try context.save()
+            try Storage.saveEntry(drink, context: context)
         } catch {
             return .result(dialog: IntentDialog("Error saving drink"))
         }

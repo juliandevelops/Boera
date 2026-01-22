@@ -15,8 +15,20 @@ private enum Settings : String, RawRepresentable {
 
 internal struct SettingsHelper {
     
-    internal static func updateSettings() {
+    internal static func updateSettings() async {
         UserDefaults.standard.set(Bundle.main.infoDictionary!["CFBundleShortVersionString"], forKey: Settings.appVersion.rawValue)
         UserDefaults.standard.set(Bundle.main.infoDictionary!["CFBundleVersion"], forKey: Settings.buildVersion.rawValue)
+        let useNotifications : Bool = UserDefaults.standard.bool(forKey: Settings.useNotifications.rawValue)
+        NotificationsHandler.useNotifications = useNotifications
+        await checkPermissions()
+    }
+
+    private static func checkPermissions() async {
+        do {
+            try await HealthHelper.checkPermissions()
+            //try await NotificationsHandler.requestPermission()
+        } catch {
+            // TODO: handle error
+        }
     }
 }

@@ -88,10 +88,10 @@ internal struct ContentView: View {
             }
         } else {
             List {
-                ForEach(getDatesArray(), id: \.self) {
+                ForEach(getDatesArray().sorted(by: { $0 > $1 }), id: \.self) {
                     date in
                     Section(DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none)) {
-                        ForEach(entries.filter({ getDateComponents($0.timestamp!) == getDateComponents(date) })) {
+                        ForEach(entries.filter({ getDateComponents($0.timestamp!) == getDateComponents(date) }).sorted(by: { $0.timestamp! > $1.timestamp! })) {
                             entry in
                             entryContainer(entry)
                                 .swipeActions(edge: .trailing) {

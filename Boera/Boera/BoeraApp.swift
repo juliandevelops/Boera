@@ -12,7 +12,7 @@ import OSLog
 @main
 struct BoeraApp: App {
     static private let persistenceController = PersistenceController.shared
-    
+
     static internal let logger : Logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.example.Boera", category: "General")
 
     var body: some Scene {
@@ -23,7 +23,9 @@ struct BoeraApp: App {
                      BoeraApp.persistenceController.container.viewContext
                 )
                 .onAppear {
-                    SettingsHelper.updateSettings()
+                    Task {
+                        await SettingsHelper.updateSettings()
+                    }
                 }
         }
     }

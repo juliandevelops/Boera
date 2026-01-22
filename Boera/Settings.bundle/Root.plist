@@ -10,6 +10,14 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Notifications</string>
+			<key>FooterText</key>
+			<string>notifications_footer_text</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>About</string>
 			<key>FooterText</key>
 			<string>Build with ❤️‍🔥 by Julian Schumacher</string>
